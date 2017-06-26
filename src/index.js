@@ -1,2 +1,7 @@
 console.log('hahahahah');
-var app = ng.module('app');
+angular.module('myApp', []);;
+
+// why ?
+angular.element(function () {
+  angular.bootstrap(document, ['myApp']);
+});
