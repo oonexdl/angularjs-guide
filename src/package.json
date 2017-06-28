@@ -18,5 +18,9 @@
   "homepage": "https://github.com/seasons521/angularjs-guide",
   "dependencies": {
     "angular": "^1.6.4"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
   }
 }
