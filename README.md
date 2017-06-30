@@ -1,6 +1,5 @@
 # angularjs-guide
 for basic developer
 
- -refferences
-
- - https://developer.github.com/v3/ 
+- refferences
+  - https://developer.github.com/v3/ 
