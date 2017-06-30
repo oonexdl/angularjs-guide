@@ -2,24 +2,17 @@
 <!--Strict mode throws an error whenever a service tries to use implicit annotations-->
 <html ng-strict-di>
   <head>
-    <title>demo</title>
+    <title>angular-guide</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="app.css">
     <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
     <script src="index.js"></script>
   </head>
   <body>
-    <div ng-init="qty=1;cost=2;" ng-controller="websocket">
-      <div>
-        Quantity: <input type="number" min="0" ng-model="qty">
-      </div>
-      <div>
-        Costs: <input type="number" min="0" ng-model="cost">
-      </div>
-      <div>
-        <b>Total:</b> {{qty * cost | currency}}
-      </div>
-      <div>
-        <button type="button" ng-click="sendMessage()">send result</button>
-      </div>
-    </div>
+    <a href="login">Login</a>
+    <a href="issues">issues list</a>
+    <ng-view onload="" autoscroll=""></ng-view>
   </body>
 </html>

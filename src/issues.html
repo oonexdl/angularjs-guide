@@ -1,0 +1,18 @@
+<div>{{ results.length }} issues </div>
+search: <input ng-model="issues.searchKey"></input>
+<table class="example-animate-container">
+  <tr>
+    <th>number</th>
+    <th>title</th>
+    <th>avatar</th>
+    <th>username</th>
+    <th>createdAt</th>
+  </tr>
+  <tr class="animate-repeat" ng-repeat="issue in issues.issues | filter:issues.searchKey as results track by issue.id">
+    <td><a href="/issues/{{ issue.number }}">{{ issue.number }}</a></td>
+    <td>{{ issue.title }}</td>
+    <td><img ng-src="{{issue.user.avatar_url}}"></td>
+    <td>{{ issue.user.login }}</td>
+    <td>{{ issue.created_at | date:short:'+0800'}}</td>
+  </tr>
+</table>

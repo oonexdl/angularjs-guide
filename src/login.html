@@ -1,0 +1,14 @@
+<div ng-init="email='xiaodongli312@gmail.com';password='123456';">
+  <div>
+    email: <input type="string" min="0" ng-model="email">
+  </div>
+  <div>
+    password: <input type="password" min="0" ng-model="password">
+  </div>
+  <div>
+    <b>Validation:</b> {{ password }}
+  </div>
+  <div>
+    <button type="button" ng-click="login()">Login</button>
+  </div>
+</div>
