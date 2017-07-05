@@ -1,12 +1,12 @@
 # angularjs-guide
-for basic developer
 
-- ppt
+## ppt
 
 ```shell
 docker run -d -v $(pwd)/src/ppt:/app -p 80:80 --name my-nginx my-nginx
 ```
 
-- refferences
+## refferences
 
-  - https://developer.github.com/v3/ 
+ - https://docs.angularjs.org/guide
+ - https://developer.github.com/v3/ 
