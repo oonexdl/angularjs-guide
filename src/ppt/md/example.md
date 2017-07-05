@@ -173,7 +173,7 @@ myApp.directive('myAmount', function() {
         template: '<div>my name: {{ name }}</div>'
         restrict: 'E'
         scope: {
-            name: '='
+            name: '@'
         }
     };
 })

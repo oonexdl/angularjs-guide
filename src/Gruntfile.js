@@ -3,7 +3,11 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     watch: {
       js: {
-        files: ['*.{js,html,css}', 'ppt/*.html', 'ppt/md/*.md'],
+        files: [
+          '{js,templates,css}/*.{js,html,css}',
+          'ppt/*.html',
+          'ppt/md/*.md'
+        ],
         tasks: [],
         options: {
           livereload: true,

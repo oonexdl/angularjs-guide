@@ -1,0 +1,38 @@
+body {
+  text-align: center;
+  margin: 170px 400px !important;
+}
+
+table img {
+  height: 40px;
+  width: 40px;
+}
+
+table>tbody>tr>th {
+  text-align: left;
+}
+
+input {
+  height: 20px;
+  margin: 20px auto;
+}
+
+.login {
+  margin: 100px;
+}
+
+.login .input-group {
+  margin: 25px 50px;
+}
+
+.issues .input-group {
+  margin: 10px 300px 10px 0px;
+}
+
+.login button {
+  margin: 5px;
+}
+
+.my-pagination {
+  text-align: right;
+}

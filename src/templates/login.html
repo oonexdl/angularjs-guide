@@ -1,0 +1,19 @@
+<my-nav cur-tab="login"></my-nav>
+<div class="login" ng-init="email='xiaodongli312@gmail.com';password='123456';">
+  <div class="input-group">
+    <span class="input-group-addon" id="email-addon">email</span>
+    <input class="form-control" type="text" min="0" ng-model="email" aria-describedby="email-addon">
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon" id="password-addon">password</span>
+    <input class="form-control" type="password" min="0" ng-model="password" aria-describedby="password-addon">
+  </div>
+  <div>
+  <b>plain text:</b>
+  {{ password }}
+  </div>
+  <div>
+    <button class="btn btn-default" type="button" ng-click="login()">Login</button>
+  </div>
+
+</div>

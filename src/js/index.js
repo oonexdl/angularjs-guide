@@ -3,20 +3,20 @@ angular.module('myApp', ['ngRoute', 'ngAnimate'])
   $locationProvider.html5Mode(true);
   $routeProvider.
     when('/login', {
-      templateUrl: 'login.html',
+      templateUrl: 'templates/login.html',
       controller: 'login'
     }).
     when('/issues', {
-      templateUrl: 'issues.html',
+      templateUrl: 'templates/issues.html',
       controller: 'issues',
       controllerAs: 'issues'
     }).
     when('/issues/:issueId', {
-      templateUrl: 'issue.html',
+      templateUrl: 'templates/issue.html',
       controller: 'issue',
       controllerAs: 'issue'
     }).
-    otherwise('/');
+    otherwise('/login');
 }])
 .controller('login', ['$scope', '$filter', '$location', function($scope, $filter, $location) {
   $scope.login = function () {
@@ -25,13 +25,28 @@ angular.module('myApp', ['ngRoute', 'ngAnimate'])
 }])
 .controller('issues', ['$http', function ($http) {
   vm = this;
-  $http.get('https://api.github.com/repos/seasons521/mynote/issues')
-    .then(function (response) {
-      vm.issues = response.data;
-      console.log(vm.issues);
-    }, function (response) {
-      console.log(response);
-    });
+  vm.issuesUrl = 'https://api.github.com/repos/seasons521/mynote/issues?per_page=5';
+  vm.pages = [1, 2, 3, 4, 5, 6];
+  vm.getList = function (page) {
+    if (page < vm.pages[0]) {
+      page = vm.pages[0];
+    };
+
+    if (page > vm.pages[vm.pages.length -1]) {
+      page = vm.page[vm.pages.length -1];
+    };
+    vm.currentPage = page;
+    $http.get(vm.issuesUrl + '&page=' + page)
+      .then(function (response) {
+        console.log(response);
+        vm.issues = response.data;
+        console.log(vm.issues);
+      }, function (response) {
+        console.log(response);
+      });
+  };
+
+  vm.getList(1);
 }])
 .controller('issue', ['$routeParams', '$http', function ($routeParams, $http) {
   vm = this;
@@ -42,7 +57,17 @@ angular.module('myApp', ['ngRoute', 'ngAnimate'])
     }, function (response) {
       console.log(response);
     });
-}]);
+}])
+.directive('myNav', function () {
+  return {
+    restrict: 'AE',
+    replace: true,
+    templateUrl: 'templates/nav.html',
+    scope: {
+      curTab: '@curTab'
+    }
+  };
+});
 
 // The following will work if you have index.js loaded at the end of the page
 // angular.bootstrap(document, ['myApp']);

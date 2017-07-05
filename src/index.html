@@ -4,15 +4,17 @@
   <head>
     <title>angular-guide</title>
     <base href="/">
-    <link rel="stylesheet" type="text/css" href="app.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-route/angular-route.js"></script>
     <script src="node_modules/angular-animate/angular-animate.js"></script>
-    <script src="index.js"></script>
+    <script src="js/index.js"></script>
   </head>
   <body>
-    <a href="login">Login</a>
-    <a href="issues">issues list</a>
     <ng-view onload="" autoscroll=""></ng-view>
   </body>
 </html>
