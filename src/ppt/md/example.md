@@ -47,7 +47,7 @@ angular.module('myApp', ['otherModule'])
 How angularjs initializes?
 
 
-AngularJS looks for the ngApp directive which designates your application root, once the ngApp directive is found then:
+- AngularJS looks for the ngApp directive which designates your application root, once the ngApp directive is found then:
 
 
 - load the module associated with the directive
@@ -67,8 +67,7 @@ Core Concepts
 
 <h3>Module</h3>
 
-a container including controllers, services, filters, directives
-
+- a container including controllers, services, filters, directives
 - separate the application into parts for code reuse
 - as dependence to other module
 
@@ -84,7 +83,7 @@ var myApp = angular.module('myApp', []);
 
 <h3>Controller</h3>
 
-  business logic behind views, once controller instantiated, a new scope will be created which assign to **$scope** object as an injectable parameter to the controller's constructor function
+- business logic behind views, once controller instantiated, a new scope will be created which assign to **$scope** object as an injectable parameter to the controller's constructor function
 
 ```html
 <div ng-controller="myCtrl">
@@ -114,7 +113,7 @@ do not use controllers to:
 
 <h3>Filter</h3>
 
-formats the value of an expression for display to the user, they can be used in view templates, controllers or services
+- formats the value of an expression for display to the user, they can be used in view templates, controllers or services
 
 ```html
 <div>{{ hello | upper }}</div>
@@ -129,7 +128,7 @@ myApp.filter('upper', function(input) {
 
 <h3>Service</h3>
 
- reusable business logic independent of views, can use services to organize and share code across app
+ - reusable business logic independent of views, can use services to organize and share code across app
 
 
 - lazily instantiated 
@@ -180,7 +179,86 @@ myApp.directive('myAmount', function() {
 ```
 
 
+
 Advanced Concepts
 
 - Dependency Injection
 - Injector
+
+
+Dependency Injection
+
+- DI is a software design pattern that deals with how components get their dependencies
+
+
+- In the below example, **SomeClass** is not concerned with creating or locating the greeter dependency, it is simply handed the greeter when it is instantiated
+
+```js
+function SomeClass(greeter) {
+  this.greeter = greeter;
+}
+
+SomeClass.prototype.doSomething = function(name) {
+  this.greeter.greet(name);
+}
+```
+
+- This is desirable, but it puts the responsibility of getting hold of the dependency on the code that constructs SomeClass
+
+
+Injector
+
+- The injector is a **service locator** that is responsible for construction and lookup of dependencies
+
+```js
+// Provide the wiring information in a module
+var myModule = angular.module('myModule', []);
+myModule.factory('greeter', ['$window', function($window) {
+  return {
+    greet: function(text) {
+      $window.alert(text);
+    }
+  };
+}]);
+
+// Create a new injector that can provide components defined in our myModule module
+var injector = angular.injector(['myModule']);
+var greeter = injector.get('greeter');
+```
+
+
+```html
+<div ng-controller="MyController">
+  <button ng-click="sayHello()">Hello</button>
+</div>
+```
+
+```js
+function MyController($scope, greeter) {
+  $scope.sayHello = function() {
+    greeter.greet('Hello World');
+  };
+}
+
+// When AngularJS compiles the HTML, it processes the ng-controller directive by asking the injector to create an instance of the controller and its dependencies
+injector.instantiate(MyController);
+```
+
+- Finally, the application code simply declares the dependencies it needs, without ever knowing about the injector. This setup does not break the [Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter)
+
+
+
+Angularjs's sweet spot
+
+
+- A higher level of abstraction to the developer. Like any abstraction, it comes at a cost of flexibility
+
+
+- In other words, not every app is a good fit for Angularjs. Angularjs was built with the CRUD application in mind
+
+
+- Such as Games and GUI with intensive and tricky DOM manipulation. In these cases it may be better to use a library with a lower level of abstraction, such as jQuery
+
+
+
+[demo](http://demo/)
