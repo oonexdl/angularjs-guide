@@ -77,7 +77,13 @@ Core Concepts
 ```
 
 ```js
-var myApp = angular.module('myApp', []);
+angular.module('myApp', []).
+config(function(injectables) { // provider-injector
+  // You can only inject Providers (not instances)
+}).
+run(function(injectables) { // instance-injector
+  // You can only inject instances (not Providers)
+});
 ```
 
 
@@ -261,4 +267,4 @@ Angularjs's sweet spot
 
 
 
-[demo](http://demo/)
+[demo](http://xiaodongli.me/)
