@@ -17,7 +17,7 @@
       <b>plain password:</b> {{ password }}
     </div>
     <div>
-      <button class="btn btn-default" type="button" ng-click="login()" ng-disabled="form.$invalid || form.$pristine">Login</button>
+      <button class="btn btn-default" type="button" ng-click="login()" ng-disabled="form.$invalid || form.email.$pristine || form.password.$pristine">Login</button>
     </div>
   </form>
 </div>
