@@ -269,4 +269,4 @@ AngularJs's sweet spot
 
 
 
-[demo](http://xiaodongli.me/)
+[simple demo](http://xiaodongli.me/)
