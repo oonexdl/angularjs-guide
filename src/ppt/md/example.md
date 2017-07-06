@@ -61,7 +61,10 @@ How AngularJs initializes?
 Core Concepts
 
 - Module
+- Data Binding
 - Controller
+- Expressions
+- Scope
 - Filter
 - Service
 - Directives
@@ -86,6 +89,25 @@ config(function(injectables) { // provider-injector
 run(function(injectables) { // instance-injector
   // You can only inject instances (not Providers)
 });
+```
+
+
+<h3>Data Binding</h3>
+
+- Data-binding in AngularJS apps is the automatic synchronization of data between the model and view
+
+```html
+<div ng-init="name='hello'">
+  <input ng-model="name"></input>
+  <div>{{ name }}</div>
+  <div ng-click="changeName()"></div>
+</div>
+```
+
+```js
+function changeName($scope) {
+  $scope.name = 'hello world';
+}
 ```
 
 
@@ -117,6 +139,101 @@ do not use controllers to:
 - Manipulate DOM 
 - Filter output
 - Share code or state across controllers 
+
+
+<h3>Expressions</h3>
+
+- Expressions are JavaScript-like code snippets that are mainly placed in interpolation bindings or directive attributes
+
+```html
+<div ng-click="functionExpression()"> 
+  <span title="{{ attrBinding }}">{{ textBinding }}</span>
+  <span>{{ a+b }}</span>
+  <span>{{ user.name }}</span>
+</div>
+```
+
+
+AngularJS Expressions vs. JavaScript Expressions
+
+- Evaluated against a **scope** object
+- No Control Flow Statements
+- No Function Declarations
+- No Object Creation With New Operator
+
+
+<h3>Scope</h3>
+
+- An object that refers to the application model
+
+```html
+<div ng-controller="MyController">
+    <input type="text" ng-model="username">
+    <button ng-click='sayHello()'>greet</button>
+  <hr>
+  {{greeting}}
+</div>
+```
+
+```js
+myApp.controller('MyController', ['$scope', function($scope) {
+  $scope.username = 'World';
+
+  $scope.sayHello = function() {
+    $scope.greeting = 'Hello ' + $scope.username + '!';
+  };
+}]);
+```
+
+
+- Be created in hierarchical structure like the DOM structure 
+
+```html
+<div class="show-scope-demo">
+  <div ng-controller="GreetController">
+    Hello {{name}}!
+  </div>
+  <div ng-controller="ListController">
+    <ol>
+      <li ng-repeat="name in names">{{name}} from {{department}}</li>
+    </ol>
+  </div>
+</div>
+```
+
+```js
+myApp.controller('GreetController', ['$scope', '$rootScope', function($scope, $rootScope){
+  $scope.name = 'World';
+  $rootScope.department = 'AngularJS';
+}])
+.controller('ListController', ['$scope', function($scope) {
+  $scope.names = ['Igor', 'Misko', 'Vojta'];
+}]);
+```
+
+
+![concepts-scope](../img/concepts-scope.png)
+
+
+- Watch expressions and propagate events
+
+```html
+<div ng-controller="EventController">
+  <!-- to parent scope -->
+  <button ng-click="$emit('MyEvent')"></button>
+  <!-- to child scope -->
+  <button ng-click="$broadcast('MyEvent')"></button>
+</div>
+```
+
+```js
+myApp.controller('EventController', ['$scope', function($scope) {
+  $scope.count = 0;
+  $scope.$on('MyEvent', function() {
+    // got event
+  });
+}]);
+```
 
 
 <h3>Filter</h3>
@@ -253,6 +370,33 @@ injector.instantiate(MyController);
 ```
 
 - Finally, the application code simply declares the dependencies it needs, without ever knowing about the injector. This setup does not break the [Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter)
+
+
+
+Depth in Data Binding
+
+
+Browser's Event Loop
+
+- The browser's event-loop waits for an event to arrive. An event is a user interaction, timer event, or network event (response from a server)
+- The event's callback gets executed. This enters the JavaScript context. The callback can modify the DOM structure
+- Once the callback executes, the browser leaves the JavaScript context and re-renders the view based on DOM changes
+
+
+AngularJs Event Processing loop
+
+![concepts-runtime](../img/concepts-runtime.png)
+
+
+- Enter the AngularJS execution context by calling scope.$apply(stimulusFn)
+- AngularJS executes the stimulusFn(), which typically modifies application state
+- AngularJS enters the $digest loop. The $digest loop keeps iterating until the model stabilizes, which means $watch list does not detect any changes and $evalAsync queue is empty
+
+
+- The $evalAsync queue is used to schedule work which needs to occur outside of current stack frame, like $http request
+- The $watch list is a set of expressions which may have changed since last iteration. If a change is detected then the $watch function is called which typically updates the DOM with the new value
+- Once the AngularJS $digest loop finishes, the execution leaves the AngularJS context. The browser re-rendering the DOM to reflect any changes
+
 
 
 
