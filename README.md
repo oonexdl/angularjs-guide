@@ -3,8 +3,11 @@
 ## ppt
 
 ```shell
-docker run -d -v $(pwd)/src/ppt:/app -p 80:80 --name my-nginx my-nginx
+docker built -t my-nginx .
+docker run -d -p 80:80 --name my-nginx my-nginx
 ```
+
+visit http://localhost/ppt
 
 ## refferences
 
