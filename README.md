@@ -3,8 +3,8 @@
 ## start
 
 ```shell
-docker pull node-builder
-docker run --rm -v $(pwd)/src:/src -w /src node-builder npm run build
+docker pull node
+docker run --rm -v $(pwd)/src:/src -w /src node npm install
 
 docker pull nginx
 docker built -t my-nginx .
