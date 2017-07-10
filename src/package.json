@@ -4,7 +4,7 @@
   "description": "for basic developer",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && grunt build"
+    "build": "npm install --dev && grunt build"
   },
   "repository": {
     "type": "git",
