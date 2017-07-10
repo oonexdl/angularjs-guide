@@ -31,11 +31,11 @@ module.exports = (grunt) ->
     watch:
       js:
         files: [
-          '{js,templates,css}/*.{js,html,css}'
+          'static/{coffee,templates,scss}/*.{coffee,html,scss}'
           'ppt/*.html'
           'ppt/md/*.md'
         ]
-        tasks: []
+        tasks: ['build']
         options:
           livereload: true
           reload: true

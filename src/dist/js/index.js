@@ -30,17 +30,19 @@ angular.module('myApp', ['ngRoute', 'ngAnimate']).config([
       if (page < vm.pages[0]) {
         page = vm.pages[0];
       }
-      if (page > vm.pages[vm.pages.length(-1)]) {
-        page = vm.page[vm.pages.length(-1)];
+      if (page > vm.pages[vm.pages.length - 1]) {
+        page = vm.page[vm.pages.length - 1];
       }
       vm.currentPage = page;
       return $http.get(vm.issuesUrl + '&page=' + page).then(function(response) {
-        return vm.issues = response.data;
+        vm.issues = response.data;
+        return console.log(response.data);
       }, function(response) {
         return console.log(response);
       });
     };
-    return vm.getList(1);
+    vm.getList(1);
+    return vm;
   }
 ]).controller('issue', [
   '$routeParams', '$http', function($routeParams, $http) {

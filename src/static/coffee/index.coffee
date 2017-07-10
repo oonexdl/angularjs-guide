@@ -37,16 +37,18 @@ angular.module 'myApp', ['ngRoute', 'ngAnimate']
     vm.pages = [1, 2, 3, 4, 5, 6]
     vm.getList = (page) ->
       page = vm.pages[0] if page < vm.pages[0]
-      page = vm.page[vm.pages.length -1] if page > vm.pages[vm.pages.length -1]
+      page = vm.page[vm.pages.length - 1] if page > vm.pages[vm.pages.length - 1]
 
       vm.currentPage = page
       $http.get vm.issuesUrl + '&page=' + page
       .then (response) ->
         vm.issues = response.data
+        console.log response.data
       , (response) ->
         console.log response
 
     vm.getList 1
+    vm
 ]
 .controller 'issue', [
   '$routeParams'
