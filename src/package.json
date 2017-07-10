@@ -4,7 +4,7 @@
   "description": "for basic developer",
   "main": "index.js",
   "scripts": {
-    "build": "npm install --dev && grunt build"
+    "build": "npm install && grunt build"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,7 @@
     "angular-animate": "^1.6.4",
     "angular-route": "^1.6.4",
     "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1"
-  },
-  "devDependencies": {
+    "jquery": "^3.2.1",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-coffee": "^1.0.0",
