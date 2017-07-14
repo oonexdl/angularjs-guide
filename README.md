@@ -20,7 +20,9 @@ docker run -d -p 80:80 --name my-nginx my-nginx
 
 ## refferences
 
+ - http://requirejs.org/docs/api.html 
  - https://docs.angularjs.org/guide
+ - https://ui-router.github.io/ng1/
  - https://gruntjs.com/getting-started
  - http://www.w3cplus.com/sassguide/syntax.html
  - https://developer.github.com/v3/ 
