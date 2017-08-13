@@ -12,7 +12,6 @@ docker run -d -p 80:80 --name my-nginx my-nginx
 ```
 
 - demo: http://localhost
-- ppt: http://localhost/ppt
 
 ### beginner with docker ?
 
